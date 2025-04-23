@@ -1,0 +1,47 @@
+body{
+    background-color: rgb(252, 243, 230);
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+    color:black;
+    border: 3px solid gray;
+    margin: 5px;
+    padding: 10px;
+    
+}
+
+.models ul {
+    display: inline-block;
+    text-align: left;
+    padding-left: 0;
+    margin: 0 auto;
+}
+
+.models li {
+    list-style-position: inside;
+    margin-left: -1em;
+}
+
+.links{
+    text-align: left;
+}
+
+.introduction{
+    font-size: 110%;
+}
+
+.firstline{
+    text-decoration: underline;
+    font-family: "Brush Script MT", cursive;
+    font-size: 120%;
+}
+
+.pictures{
+    color: rgb(0, 27, 80);
+}
+
+.tableaugraph{
+    display: flex;
+    justify-content: center;
+    margin: 2em 0;
+}
+

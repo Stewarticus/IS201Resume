@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number Guessing Game</title>
+  <style>
+    body {
+      font-family: 'Comic Neue', cursive, sans-serif;
+      background-image: url(Images/seamless-pattern-with-numbers-from-zero-nine-white-background-vector-repeating-texture_1216344-1125.jpg);
+      background-size: cover;         
+      background-position: center;    
+      background-repeat: no-repeat;   
+      min-height: 100vh;              
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(198, 198, 198, 0.5); /* Adjust for lighter/darker */
+      z-index: -1;
+    }
+    
+    h1 {
+      color: black;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 60px;
+    }
+
+    #guessBtn {
+      margin-top: 15px;
+      background-color: #4CAF50;
+      color: white;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 32px;
+    }
+
+    .guesses {
+      margin-top: 10px;
+      color: #000000;
+      font-size: 26px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Guess the Number (1 to 10)</h1>
+  <input type="number" id="guessInput" min="1" max="10">
+  <button id="guessBtn" onclick="checkGuess()">Guess</button>
+
+  <div class="message" id="message"></div>
+  <div class="guesses" id="guessesList"></div>
+
+  <script>
+    let secretNumber = Math.floor(Math.random() * 10) + 1;
+    let guesses = [];
+
+    function resetGame() {
+      secretNumber = Math.floor(Math.random() * 10) + 1;
+      guesses = [];
+      document.getElementById('guessInput').value = '';
+      document.getElementById('guessInput').disabled = false;
+      document.getElementById('message').textContent = '';
+      document.getElementById('guessesList').textContent = '';
+      document.getElementById('guessInput').focus();
+    }
+
+    function checkGuess() {
+      const input = document.getElementById('guessInput');
+      const guess = Number(input.value);
+      const message = document.getElementById('message');
+      const guessesList = document.getElementById('guessesList');
+
+      if (guess < 1 || guess > 10 || isNaN(guess)) {
+        message.textContent = "⚠️ Please enter a number between 1 and 10.";
+        return;
+      }
+
+      guesses.push(guess);
+      guessesList.textContent = "Your guesses so far: " + guesses.join(", ");
+
+      if (guess === secretNumber) {
+        message.textContent = "🎉 Good job! You guessed it!";
+        input.disabled = true;
+        setTimeout(resetGame, 2000);
+      } else if (guess < secretNumber) {
+        message.textContent = "🔼 Too low! Try again.";
+      } else {
+        message.textContent = "🔽 Too high! Try again.";
+      }
+
+      input.value = '';
+      input.focus();
+    }
+
+  </script>
+
+</body>
+</html>
