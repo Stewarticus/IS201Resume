@@ -67,46 +67,55 @@
   <script>
     let secretNumber = Math.floor(Math.random() * 10) + 1;
     let guesses = [];
-
+  
     function resetGame() {
       secretNumber = Math.floor(Math.random() * 10) + 1;
       guesses = [];
-      document.getElementById('guessInput').value = '';
-      document.getElementById('guessInput').disabled = false;
-      document.getElementById('message').textContent = '';
-      document.getElementById('guessesList').textContent = '';
-      document.getElementById('guessInput').focus();
+      const input = document.getElementById('guessInput');
+      const message = document.getElementById('message');
+      const guessesList = document.getElementById('guessesList');
+  
+      input.value = '';
+      input.disabled = false;
+      message.textContent = '';
+      guessesList.textContent = '';
+      document.body.style.backgroundColor = 'rgba(253, 238, 229, 0.85)';
     }
-
+  
     function checkGuess() {
       const input = document.getElementById('guessInput');
       const guess = Number(input.value);
       const message = document.getElementById('message');
       const guessesList = document.getElementById('guessesList');
-
+  
       if (guess < 1 || guess > 10 || isNaN(guess)) {
         message.textContent = "⚠️ Please enter a number between 1 and 10.";
         return;
       }
-
+  
       guesses.push(guess);
       guessesList.textContent = "Your guesses so far: " + guesses.join(", ");
-
+  
       if (guess === secretNumber) {
         message.textContent = "🎉 Good job! You guessed it!";
         input.disabled = true;
-        setTimeout(resetGame, 2000);
+        document.body.style.backgroundColor = '#90EE90'; 
+        setTimeout(() => {
+          resetGame();
+        }, 1000); 
       } else if (guess < secretNumber) {
         message.textContent = "🔼 Too low! Try again.";
       } else {
         message.textContent = "🔽 Too high! Try again.";
       }
-
+  
       input.value = '';
       input.focus();
     }
-
+    document.getElementById('guessInput').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        checkGuess();
+      }
+    });
   </script>
-
-</body>
-</html>
+  
